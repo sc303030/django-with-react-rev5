@@ -1,12 +1,16 @@
 import React from "react";
 import { Card } from "antd";
 import "./SuggestionList.scss";
+import Suggestion from "./Suggestion";
 
 export default function SuggestionList({ style }) {
   return (
     <div style={style}>
       <Card title="Suggestion for you" size="small">
-        Stories from people you follow will show up here.
+        <Suggestion />
+        <Suggestion />
+        <Suggestion />
+        <Suggestion />
       </Card>
     </div>
   );
