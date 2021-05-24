@@ -26,7 +26,7 @@ export default function Login() {
           data: { token: jwtToken },
         } = response;
 
-        dispatch(setToken(jwtToken));
+        // dispatch(setToken(jwtToken));
 
         notification.open({
           message: "로그인 성공",

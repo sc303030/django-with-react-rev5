@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext } from "react";
+import useReducerWithSideEffects, {
+  UpdateWithSideEffect,
+  Update,
+} from "use-reducer-with-side-effects";
+import { getStorageItem, setStorageItem } from "utils/useLocalStorage";
 
 const initialState = {
   jwtToken: "",
@@ -10,21 +15,26 @@ const reducer = (pervState, action) => {
   const { type } = action;
   if (type === SET_TOKEN) {
     const { payload: jwtToken } = action;
-    return {
+    const newState = {
       ...pervState,
       jwtToken,
     };
+    return UpdateWithSideEffect(newState, (state, dispatch) => {
+      setStorageItem("jwtToken", jwtToken);
+    });
   } else if (type === DELETE_TOKEN) {
-    return {
+    return Update({
       ...pervState,
       jwtToken: "",
-    };
+    });
   }
   return pervState;
 };
 
 export const AppProvider = ({ children }) => {
-  const { store, dispatch } = useReducer(reducer, initialState);
+  const [store, dispatch] = useReducerWithSideEffects(reducer, null, () => {
+    jwtToken: getStorageItem("jwyToken", "");
+  });
   return (
     <AppContext.Provider value={{ store, dispatch }}>
       {children}
