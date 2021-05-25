@@ -23,9 +23,12 @@ const reducer = (pervState, action) => {
       setStorageItem("jwtToken", jwtToken);
     });
   } else if (type === DELETE_TOKEN) {
-    return Update({
+    const newState = {
       ...pervState,
       jwtToken: "",
+    };
+    return UpdateWithSideEffect(newState, (state, dispatch) => {
+      setStorageItem("jwtToken", "");
     });
   }
   return pervState;
