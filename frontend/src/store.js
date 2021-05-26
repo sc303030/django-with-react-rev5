@@ -18,6 +18,7 @@ const reducer = (pervState, action) => {
     const newState = {
       ...pervState,
       jwtToken,
+      isAuthenticated: true,
     };
     return UpdateWithSideEffect(newState, (state, dispatch) => {
       setStorageItem("jwtToken", jwtToken);
@@ -26,6 +27,7 @@ const reducer = (pervState, action) => {
     const newState = {
       ...pervState,
       jwtToken: "",
+      isAuthenticated: false,
     };
     return UpdateWithSideEffect(newState, (state, dispatch) => {
       setStorageItem("jwtToken", "");
@@ -35,8 +37,10 @@ const reducer = (pervState, action) => {
 };
 
 export const AppProvider = ({ children }) => {
-  const [store, dispatch] = useReducerWithSideEffects(reducer, null, () => {
-    jwtToken: getStorageItem("jwyToken", "");
+  const jwtToken = getStorageItem("jwyToken", "");
+  const [store, dispatch] = useReducerWithSideEffects(reducer, {
+    jwtToken: getStorageItem("jwyToken", ""),
+    isAuthenticated: jwtToken.length >= 0,
   });
   return (
     <AppContext.Provider value={{ store, dispatch }}>
