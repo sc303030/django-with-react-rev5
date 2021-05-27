@@ -3,14 +3,19 @@ import { Card, Form, Input, Button, notification } from "antd";
 import { SmileOutlined, FormOutlined } from "@ant-design/icons";
 import { userHistory } from "react-router-dom";
 import Axios from "axios";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import useLocalStorage from "utils/useLocalStorage";
 import { useAppContext } from "store";
 
 export default function Login() {
   const { dispatch } = useAppContext();
+  const location = useLocation();
   const history = useHistory();
   const [fieldErrors, setFieldErrors] = useState({});
+
+  const { from: loginRedirecUrl } = location.state || {
+    form: { pathname: "/" },
+  };
 
   const onFinish = (values) => {
     async function fn() {
@@ -26,13 +31,13 @@ export default function Login() {
           data: { token: jwtToken },
         } = response;
 
-        // dispatch(setToken(jwtToken));
+        dispatch(this.setToken(jwtToken));
 
         notification.open({
           message: "로그인 성공",
           icon: <SmileOutlined style={{ color: "#108ee9" }} />,
         });
-        // history.push("accounts/login");
+        history.push(loginRedirecUrl);
       } catch (error) {
         if (error.response) {
           notification.open({
