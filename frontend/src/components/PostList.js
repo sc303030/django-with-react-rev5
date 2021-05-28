@@ -12,7 +12,8 @@ function PostList() {
   } = useAppContext();
   const [postList, setPostList] = useState([]);
   useEffect(() => {
-    Axios.get(apiUrl)
+    const headers = { Authorization: jwtToken };
+    Axios.get(apiUrl, { headers })
       .then((response) => {
         const { data } = response;
         console.log("loaded response : ", response);

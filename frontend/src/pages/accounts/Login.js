@@ -5,7 +5,7 @@ import { userHistory } from "react-router-dom";
 import Axios from "axios";
 import { useHistory, useLocation } from "react-router";
 import useLocalStorage from "utils/useLocalStorage";
-import { useAppContext } from "store";
+import { useAppContext, setToken } from "store";
 
 export default function Login() {
   const { dispatch } = useAppContext();
@@ -30,8 +30,7 @@ export default function Login() {
         const {
           data: { token: jwtToken },
         } = response;
-
-        dispatch(this.setToken(jwtToken));
+        dispatch(setToken(jwtToken));
 
         notification.open({
           message: "로그인 성공",

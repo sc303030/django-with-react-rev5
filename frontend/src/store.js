@@ -37,10 +37,10 @@ const reducer = (pervState, action) => {
 };
 
 export const AppProvider = ({ children }) => {
-  const jwtToken = getStorageItem("jwyToken", "");
+  const jwtToken = getStorageItem("jwtToken", "");
   const [store, dispatch] = useReducerWithSideEffects(reducer, {
-    jwtToken: getStorageItem("jwyToken", ""),
-    isAuthenticated: jwtToken.length >= 0,
+    jwtToken: getStorageItem("jwtToken", ""),
+    isAuthenticated: jwtToken.length > 0,
   });
   return (
     <AppContext.Provider value={{ store, dispatch }}>
