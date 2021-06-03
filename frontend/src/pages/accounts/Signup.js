@@ -3,10 +3,15 @@ import { Form, Input, Button, notification } from "antd";
 import { SmileOutlined, FormOutlined } from "@ant-design/icons";
 import { userHistory } from "react-router-dom";
 import Axios from "axios";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 export default function Signup() {
   const history = useHistory();
+  const location = useLocation();
+  const { from: loginRedirecUrl } = location.state || {
+    from: { pathname: "../../accounts/login" },
+  };
+
   const [fieldErrors, setFieldErrors] = useState({});
   const onFinish = (values) => {
     async function fn() {
@@ -23,7 +28,7 @@ export default function Signup() {
           description: "로그인 페이지로 이동합니다.",
           icon: <SmileOutlined style={{ color: "#108ee9" }} />,
         });
-        history.push("accounts/login");
+        history.push(loginRedirecUrl);
       } catch (error) {
         if (error.response) {
           notification.open({

@@ -14,7 +14,7 @@ export default function Login() {
   const [fieldErrors, setFieldErrors] = useState({});
 
   const { from: loginRedirecUrl } = location.state || {
-    form: { pathname: "/" },
+    from: { pathname: "/" },
   };
 
   const onFinish = (values) => {
