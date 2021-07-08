@@ -1,0 +1,10 @@
+docker run --rm -p 9999:80 ^
+-e DJANGO_SETTINGS_MODULE=backend.settings.prod ^
+-e AZURE_ACCOUNT_NAME=test210615 ^
+-e AZURE_ACCOUNT_KEY="U0usxArRRxsj+8N9HTWwZTmhdWig+G/LPhpUzV/gK90anasgL9MRdP7/pS3xm0+QJ2OVMwPo3ctfvcCqxyPvwg==" ^
+-e ALLOWED_HOSTS=127.0.0.1 ^
+-e DB_HOST=dsltestdocker.postgres.database.azure.com ^
+-e DB_USER=test_docker@dsltestdocker ^
+-e DB_PASSWORD=9686ok35~~ ^
+-e DB_NAME=postgres ^
+dsltest2021/test:0.3

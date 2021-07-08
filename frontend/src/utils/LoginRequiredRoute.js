@@ -1,6 +1,6 @@
 import React from "react";
-import { Redirect, Route } from "react-router";
-import { useAppContext } from "store";
+import { Route, Redirect } from "react-router-dom";
+import { useAppContext } from "../store";
 
 export default function LoginRequiredRoute({
   component: Component,
@@ -10,10 +10,10 @@ export default function LoginRequiredRoute({
     store: { isAuthenticated },
   } = useAppContext();
 
-  console.log("isAuthenticated : ", isAuthenticated);
   if (isAuthenticated) {
   } else {
   }
+
   return (
     <Route
       {...kwargs}
@@ -24,7 +24,7 @@ export default function LoginRequiredRoute({
           return (
             <Redirect
               to={{
-                pathname: "/accounts/login/",
+                pathname: "/accounts/login",
                 state: { from: props.location },
               }}
             />

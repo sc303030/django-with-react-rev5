@@ -1,9 +1,9 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Profile from "./Profile";
 import Login from "./Login";
+import Profile from "./Profile";
 import Signup from "./Signup";
-import LoginRequiredRoute from "utils/LoginRequiredRoute";
+import LoginRequiredRoute from "../../utils/LoginRequiredRoute";
 
 function Routes({ match }) {
   return (

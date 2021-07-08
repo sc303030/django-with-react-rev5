@@ -1,4 +1,6 @@
-db.sqlite3
-__pycache__
 .vscode
 .idea
+db.sqlite3
+__pycache__
+backend/media
+backend/static
