@@ -15,9 +15,17 @@ export default function SuggestionList({ style }) {
   const headers = { Authorization: `JWT ${jwtToken}` };
 
   const [{ data: origUserList, loading, error }, refetch] = useAxios({
-    url: "/accounts/suggestions/",
+    url: "http://localhost:8000/accounts/suggestions/",
     headers,
   });
+
+  // const userList =
+  //   origUserList && origUserList.map((user) => ({ ...user, isFollow: false }));
+
+  // const userList = useMemo(() => {
+  //   if (!origUserList) return [];
+  //   origUserList.map((user) => ({ ...user, is_follow: false }));
+  // }, [origUserList]);
 
   useEffect(() => {
     if (!origUserList) setUserList([]);
